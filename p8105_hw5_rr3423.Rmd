@@ -80,7 +80,7 @@ homicide_df %>%
 homicide_df %>% 
   filter(resolution == "unsolved") %>% 
   group_by(city_state, resolution) %>% 
-  summarize(count = n()) %>% 
+  summarize(n = n()) %>% 
   knitr::kable(
     caption = "**Table 2: Total number of unsolved homicides within cities**"
   )
@@ -92,5 +92,18 @@ homicide_df %>%
 baltimore_df = 
   homicide_df %>% 
   filter(city_state == "BaltimoreMD")
+
+baltimore_summary = 
+  baltimore_df %>% 
+  summarize(
+    unsolved = sum(resolution == "unsolved"),
+    n = n()
+  )
+
+prop.test(
+  x = baltimore_summary %>% pull(unsolved),
+  n = baltimore_summary %>% pull(n)
+)
 ```
 
+Based on the 1-sample proportions test, 64.6% of homicides in Baltimore are unsolved (p = 0.646) and there is a 95% confidence interval of (0.628, 0.663).  
