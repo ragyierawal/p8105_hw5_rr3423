@@ -115,7 +115,7 @@ baltimore_test %>%
 
 From the resulting tidy dataframe, the estimated proportion is 0.646 and the 95% confidence interval is (0.628, 0.663). This means that approximately 64.6% of homicides in Baltimore are unsolved. 
 
-### Iterating across cities 
+### Creating prop.test function 
 
 ```{r prop_test_function}
 # creating a function 
@@ -144,5 +144,14 @@ prop_test_function(baltimore_df)
 homicide_df %>% 
   filter(city_state == "AlbuquerqueNM") %>% 
   prop_test_function
+```
+
+# Iterating across cities 
+
+```{r iterating_cities}
+# nesting dataset within cities 
+nested_df = 
+  homicide_df %>% 
+  nest(data = uid:resolution)
 ```
 
