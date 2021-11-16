@@ -30,14 +30,12 @@ scale_fill_discrete = scale_fill_viridis_d
 ## PROBLEM 1 
 
 ```{r import_data}
-# importing homicide dataset 
 homicide_data = read_csv("data/homicide-data.csv", na = c("", "Unknown"))
 ```
 
 ### Describing raw data 
 
 ```{r describing_data}
-# describing key variables, number of columns, number of rows 
 homicide_variable = 
   homicide_data %>% 
   names()
@@ -56,7 +54,6 @@ The **key variables** in the raw homicide dataset are `r homicide_variable`. The
 ### Creating city-state and resolution variables
 
 ```{r tidy_data}
-# city-state and resolution variables for homicide_df
 homicide_df = 
   homicide_data %>%
   mutate(
@@ -93,12 +90,10 @@ homicide_df %>%
 ### Focusing on Baltimore, MD 
 
 ```{r baltimore_analysis}
-# creating baltimore dataframe 
 baltimore_df = 
   homicide_df %>% 
   filter(city_state == "BaltimoreMD")
 
-# summarizing unsolved homicides and total homicides in baltimore 
 baltimore_summary = 
   baltimore_df %>% 
   summarize(
@@ -116,7 +111,30 @@ baltimore_test =
 # applying broom::tidy
 baltimore_test %>% 
   broom::tidy()
-
 ```
 
-Based on the 1-sample proportions test, 64.6% of homicides in Baltimore are unsolved (p = 0.646) and there is a 95% confidence interval of (0.628, 0.663).  
+From the resulting tidy dataframe, the estimated proportion is 0.646 and the 95% confidence interval is (0.628, 0.663). This means that approximately 64.6% of homicides in Baltimore are unsolved. 
+
+### Iterating across cities 
+
+```{r}
+prop_test_function = function(city_df) {
+  
+  city_summary = 
+    city_df %>% 
+    summarize(
+      unsolved = sum(resolution == "unsolved"),
+      n = n()
+    )
+
+  city_test = 
+   prop.test(
+    x = city_summary %>% pull(unsolved),
+    n = city_summary %>% pull(n)
+  )
+  
+  return(city_test)
+  
+}
+```
+
