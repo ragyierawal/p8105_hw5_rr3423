@@ -54,7 +54,10 @@ The **key variables** in the raw homicide dataset are `r homicide_variable`. The
 
 ### Tidying data, creating city-state variable
 
-```{r}
-
+```{r tidy_data}
+homicide_df = 
+  homicide_data %>%
+  mutate(city_state = str_c(city, state)) %>% 
+  relocate(city_state)
 ```
 
