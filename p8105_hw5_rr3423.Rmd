@@ -6,8 +6,6 @@ output: github_document
 
 ```{r setup, include = FALSE}
 library(tidyverse)
-library(p8105.datasets)
-library(viridis)
 
 knitr::opts_chunk$set(
   fig.width = 6,
@@ -177,12 +175,25 @@ results_df %>%
 
 ### Creating a dataframe containing all file names using list.files
 
-```{r}
+```{r files_names_}
 file_names = list.files("data/zip_data/")
 
-file_name_df = 
+file_names_df = 
   tibble(
     file = file_names)
+```
+
+### Iterating over file names 
+
+```{r file_iteration}
+file_iteration_function = function(file_name) {
+  
+  data = 
+    read_csv(file = paste0("data/zip_data/", file_name) )
+  
+}
+
+con1 = file_iteration_function("con_01.csv")
 ```
 
 
