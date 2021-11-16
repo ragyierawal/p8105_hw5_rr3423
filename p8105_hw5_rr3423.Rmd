@@ -86,3 +86,11 @@ homicide_df %>%
   )
 ```
 
+### Focusing on Baltimore, MD 
+
+```{r baltimore_analysis}
+baltimore_df = 
+  homicide_df %>% 
+  filter(city_state == "BaltimoreMD")
+```
+
