@@ -175,5 +175,35 @@ results_df %>%
 
 ## PROBLEM 2 
 
+### Creating a dataframe containing all file names 
+
+```{r}
+file_names_df = 
+  tibble(
+    file = list.files("data/zip_data/"))
+```
+
 
 ## PROBLEM 3 
+
+Write a function 
+
+```{r}
+#fill_in_missing = function(vector) {
+  
+  #if (is.numeric) {
+    
+    #....
+    
+  #}
+    
+  #if (is.character) {
+    
+    #....
+ # }
+
+#}
+
+# map across all of the columns after this function 
+```
+
