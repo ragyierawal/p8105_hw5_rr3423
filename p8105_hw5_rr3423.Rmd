@@ -6,6 +6,8 @@ output: github_document
 
 ```{r setup, include = FALSE}
 library(tidyverse)
+library(p8105.datasets)
+library(viridis)
 
 knitr::opts_chunk$set(
   fig.width = 6,
@@ -22,5 +24,13 @@ options(
 
 scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
+```
+
+
+## PROBLEM 1 
+
+```{r import_data}
+# importing homicide dataset 
+homicide_data = read_csv("data/homicide-data.csv")
 ```
 
