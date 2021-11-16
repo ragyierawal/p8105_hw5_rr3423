@@ -72,19 +72,13 @@ homicide_df =
 ```{r summarize_cities, message = FALSE, warning = FALSE}
 # summarizing total number of homicides within cities 
 homicide_df %>% 
-  count(city_state) %>% 
+  group_by(city_state) %>% 
+  summarize(
+    unsolved = sum(resolution == "unsolved"), 
+    total = n()
+  ) %>% 
   knitr::kable(
-    caption = "**Table 1: Total number of homicides within cities**"
-  )
-
-# summarizing total number of unsolved homicides within cities 
-homicide_df %>% 
-  filter(resolution == "unsolved") %>% 
-  group_by(city_state, resolution) %>% 
-  summarize(n = n()) %>% 
-  knitr::kable(
-    caption = "**Table 2: Total number of unsolved homicides within cities**"
-  )
+    caption = "**Table 1: Total number of homicides and unsolved homicides within cities**")
 ```
 
 ### Focusing on Baltimore, MD 
@@ -178,3 +172,8 @@ results_df %>%
   )
 ```
 
+
+## PROBLEM 2 
+
+
+## PROBLEM 3 
