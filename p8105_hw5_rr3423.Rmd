@@ -52,7 +52,7 @@ homicide_rows =
 
 The **key variables** in the raw homicide dataset are `r homicide_variable`. The **number of columns** in the raw homicide dataset are `r homicide_columns`. The **number of rows** in the raw homicide dataset are `r homicide_rows`. There is data provided for a total of **`r homicide_rows` homicides** from 50 large U.S. cities. The raw dataset contained "Unknown" and blank data values, which I replaced with "NA" values when importing the csv file. 
 
-### Tidying data, creating city-state variable
+### Creating city-state and resolution variables
 
 ```{r tidy_data}
 homicide_df = 
@@ -64,6 +64,25 @@ homicide_df =
       disposition == "Open/No arrest" ~ "unsolved",
       disposition == "Closed by arrest" ~ "solved"
     )) %>% 
-  relocate(city_state)
+  relocate(city_state) %>% 
+  filter(city_state != "TulsaAL")
+```
+
+### Summary of the total number of homicides and the number of unsolved homicides within cities
+
+```{r summarize_cities, message = FALSE, warning = FALSE}
+homicide_df %>% 
+  count(city_state) %>% 
+  knitr::kable(
+    caption = "**Table 1: Total number of homicides within cities**"
+  )
+
+homicide_df %>% 
+  filter(resolution == "unsolved") %>% 
+  group_by(city_state, resolution) %>% 
+  summarize(count = n()) %>% 
+  knitr::kable(
+    caption = "**Table 2: Total number of unsolved homicides within cities**"
+  )
 ```
 
