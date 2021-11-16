@@ -36,7 +36,7 @@ homicide_data = read_csv("data/homicide-data.csv", na = c("", "Unknown"))
 
 ### Describing raw data 
 
-```{r}
+```{r describing_data}
 homicide_variable = 
   homicide_data %>% 
   names()
@@ -50,9 +50,7 @@ homicide_rows =
   nrow()
 ```
 
-The **key variables** in the raw homicide dataset are `r homicide_variable`. The **number of columns** in the raw homicide dataset are `r homicide_columns`. The **number of rows** in the raw homicide dataset are `r homicide_rows`. There is data provided for a total of **`r homicide_rows` homicides** from 50 large U.S. cities. 
-
-The raw dataset contained "Unknown" and blank data values, which I replaced with "NA" values when importing the csv file. 
+The **key variables** in the raw homicide dataset are `r homicide_variable`. The **number of columns** in the raw homicide dataset are `r homicide_columns`. The **number of rows** in the raw homicide dataset are `r homicide_rows`. There is data provided for a total of **`r homicide_rows` homicides** from 50 large U.S. cities. The raw dataset contained "Unknown" and blank data values, which I replaced with "NA" values when importing the csv file. 
 
 ### Tidying data, creating city-state variable
 
