@@ -175,25 +175,30 @@ results_df %>%
 
 ### Creating a dataframe containing all file names using list.files
 
-```{r files_names_}
-file_names = list.files("data/zip_data/")
-
+```{r file_names_}
 file_names_df = 
   tibble(
-    file = file_names)
+    file = list.files("data/zip_data/"))
 ```
 
 ### Iterating over file names 
 
 ```{r file_iteration}
+# creating iteration function 
 file_iteration_function = function(file_name) {
   
   data = 
-    read_csv(file = paste0("data/zip_data/", file_name) )
+    read_csv(file = paste0("data/zip_data/", file_name))
   
 }
 
-con1 = file_iteration_function("con_01.csv")
+# iterating over file names, saving result as new variable in dataframe
+participants_df = 
+  file_names_df %>% 
+  mutate(
+    weeks_data = map(file, file_iteration_function)
+  ) %>% 
+  unnest(weeks_data)
 ```
 
 
