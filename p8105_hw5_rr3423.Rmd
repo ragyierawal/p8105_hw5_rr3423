@@ -243,8 +243,7 @@ tidy_participants_df %>%
   theme(legend.position = "right") 
 ```
 
-
-
+The observation data for experimental subjects over time is higher than the observation data for control subjects over time. The observation data for experimental subjects generally increases over time, while the observation data for control subjects appears to stay relatively stable over time. 
 
 
 
