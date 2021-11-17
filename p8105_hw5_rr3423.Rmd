@@ -235,6 +235,7 @@ tidy_participants_df %>%
   ggplot(aes(x = week, y = observation_data, color = subject_id)) + 
   geom_line(aes(group = subject_id)) + 
   facet_grid(.~ study_arm) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
   labs(
     title = "Observation data on each subject over time",
     x = "Week", 
