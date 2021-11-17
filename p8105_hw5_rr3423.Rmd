@@ -183,7 +183,7 @@ file_names_df =
 
 ### Iterating over file names 
 
-```{r file_iteration}
+```{r file_iteration, message = FALSE, warning = FALSE}
 # creating iteration function 
 file_iteration_function = function(file_name) {
   
@@ -198,7 +198,20 @@ participants_df =
   mutate(
     weeks_data = map(file, file_iteration_function)
   ) %>% 
-  unnest(weeks_data)
+  unnest(weeks_data) %>% 
+  mutate(
+    study_arm = str_extract(file, "con|exp"),
+    study_arm = case_when(
+      study_arm == "con" ~ "control",
+      study_arm == "exp" ~ "experimental"
+    )
+  )
+```
+
+### Tidying dataframe 
+
+```{r}
+
 ```
 
 
