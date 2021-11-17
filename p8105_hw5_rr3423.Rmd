@@ -285,5 +285,5 @@ for (i in 1:5) {
 }
 
 # displaying final iris_with_missing dataset 
-iris_with_missing
+knitr::kable(iris_with_missing)
 ```
