@@ -277,11 +277,10 @@ iris_missing_function = function(x) {
 }
 ```
 
-### Iterating across columns 
+### Iterating across columns of iris_with_missing using a map statement
 
 ```{r column_iteration}
 for (i in 1:5) {
   iris_with_missing[i] = map(iris_with_missing[i], ~iris_missing_function(.x))
 }
 ```
-
