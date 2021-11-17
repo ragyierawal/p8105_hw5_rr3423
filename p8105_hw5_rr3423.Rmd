@@ -283,4 +283,7 @@ iris_missing_function = function(x) {
 for (i in 1:5) {
   iris_with_missing[i] = map(iris_with_missing[i], ~iris_missing_function(.x))
 }
+
+# displaying final iris_with_missing dataset
+iris_with_missing
 ```
