@@ -210,9 +210,9 @@ participants_df %>%
     study_arm = str_extract(file, "con|exp"),
     study_arm = case_when(
       study_arm == "con" ~ "control",
-      study_arm == "exp" ~ "experimental"
+      study_arm == "exp" ~ "experimental"), 
+    study_id = str_replace(file, ".csv", "")
     )
-  )
 ```
 
 
