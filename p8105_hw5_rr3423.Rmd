@@ -246,28 +246,38 @@ tidy_participants_df %>%
 The observation data for experimental subjects over time is higher than the observation data for control subjects over time. The observation data for experimental subjects generally increases over time, while the observation data for control subjects appears to stay relatively stable over time. 
 
 
-
-
 ## PROBLEM 3 
 
-Write a function 
+### Loading the iris dataset 
 
-```{r}
-#fill_in_missing = function(vector) {
+```{r loading_iris}
+library(tidyverse)
+
+set.seed(10)
+
+iris_with_missing = iris %>% 
+  map_df(~replace(.x, sample(1:150, 20), NA)) %>%
+  mutate(Species = as.character(Species))
+```
+
+### Writing function for missing values 
+
+```{r iris_function}
+iris_missing_function = function(vector) {
   
-  #if (is.numeric) {
-    
-    #....
-    
-  #}
-    
-  #if (is.character) {
-    
-    #....
- # }
+  if (is.numeric(vector)) {
+    vector[is.na(vector)] = mean(vector, na.rm = TRUE)
+    message(mean(vector, na.rm = TRUE))
+  }
+  
+  if (is.character(vector)) {
+    vecotr[is.na(vector)] = "virginica"
+  }
+  
+  return(vector)
+  
+}
 
-#}
 
 # map across all of the columns after this function 
 ```
-
