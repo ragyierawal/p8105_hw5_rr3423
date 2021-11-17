@@ -228,8 +228,20 @@ tidy_participants_df =
   )
 ```
 
+### Creating spaghetti plot showing observations on each subject over time 
 
-
+```{r spaghetti_plot}
+tidy_participants_df %>% 
+  ggplot(aes(x = week, y = observation_data, color = subject_id)) + 
+  geom_line(aes(group = subject_id)) + 
+  facet_grid(.~ study_arm) +
+  labs(
+    title = "Observation data on each subject over time",
+    x = "Week", 
+    y = "Observation data"
+  ) + 
+  theme(legend.position = "right") 
+```
 
 
 
