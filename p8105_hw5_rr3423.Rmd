@@ -207,14 +207,21 @@ participants_df =
 # tidying the resulting dataframe
 tidy_participants_df = 
   participants_df %>%
-    mutate(
-      study_arm = str_extract(file, "con|exp"),
-      study_arm = case_when(
-        study_arm == "con" ~ "control",
-        study_arm == "exp" ~ "experimental"), 
-      study_id = str_replace(file, ".csv", "")
-    ) %>% 
-  select(-file)
+  janitor::clean_names() %>% 
+  mutate(
+    study_arm = str_extract(file, "con|exp"),
+    study_arm = case_when(
+      study_arm == "con" ~ "control",
+      study_arm == "exp" ~ "experimental"), 
+    subject_id = str_replace(file, ".csv", "")
+  ) %>% 
+  select(-file) %>% 
+  relocate(subject_id, study_arm, everything()) %>% 
+  pivot_longer(
+    week_1:week_8,
+    names_to = "week",
+    values_to = "observation_data"
+  )
 ```
 
 
