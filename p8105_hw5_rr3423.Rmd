@@ -175,7 +175,7 @@ results_df %>%
 
 ### Creating a dataframe containing all file names using list.files
 
-```{r file_names_}
+```{r file_names}
 file_names_df = 
   tibble(
     file = list.files("data/zip_data/"))
@@ -198,7 +198,14 @@ participants_df =
   mutate(
     weeks_data = map(file, file_iteration_function)
   ) %>% 
-  unnest(weeks_data) %>% 
+  unnest(weeks_data)
+```
+
+### Tidying dataframe 
+
+```{r tidy_df}
+# tidying the resulting dataframe
+participants_df %>%
   mutate(
     study_arm = str_extract(file, "con|exp"),
     study_arm = case_when(
@@ -208,11 +215,13 @@ participants_df =
   )
 ```
 
-### Tidying dataframe 
 
-```{r}
 
-```
+
+
+
+
+
 
 
 ## PROBLEM 3 
