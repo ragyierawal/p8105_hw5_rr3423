@@ -224,7 +224,8 @@ tidy_participants_df =
   ) %>% 
   mutate(
     week = factor(week,levels = c("week_1", "week_2", "week_3", "week_4",
-                                  "week_5", "week_6", "week_7", "week_8"))
+                                  "week_5", "week_6", "week_7", "week_8")),
+    week = str_replace(week, "_", " ")
   )
 ```
 
